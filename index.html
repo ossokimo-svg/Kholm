@@ -946,12 +946,12 @@
   .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: white; transform: scale(1.05); }
 
   .contact-map {
-    background: rgba(255,255,255,0.1);
     border-radius: 24px;
     overflow: hidden;
-    height: 380px;
+    height: 420px;
     position: relative;
-    border: 2px solid rgba(255,255,255,0.2);
+    border: 3px solid rgba(255,255,255,0.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
 
   .map-placeholder {
@@ -1033,38 +1033,228 @@
   footer .footer-links a:hover { color: var(--green-bright); }
   footer .copyright { font-size: 0.8rem; opacity: 0.5; }
 
+
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .review-card {
+    background: #f8fdf8;
+    border: 2px solid #e0f0e0;
+    border-radius: 20px;
+    padding: 1.8rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(45,106,45,0.12);
+    border-color: var(--green-light);
+  }
+  .review-stars { font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .review-card p { color: #444; line-height: 1.7; font-style: italic; font-size: 0.95rem; margin-bottom: 1rem; }
+  .review-author { font-weight: 700; color: var(--green); font-size: 0.9rem; }
+
+  @media (max-width: 700px) {
+    .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+  }
+
+  @keyframes menuSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
   /* ===== MOBILE ===== */
+  /* ===== TABLET ===== */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
 
-    .produce-showcase { grid-template-columns: 1fr; }
-    .produce-visual { height: 250px; }
-    .produce-circle { width: 200px; height: 200px; font-size: 4rem; }
+    .section-pad { padding: 4rem 0; }
+    #offers, #produce, #world, #about { padding: 4rem 0; }
+    #meat { padding: 4rem 0; }
+    #contact { padding: 4rem 0; }
+
+    .produce-showcase { grid-template-columns: 1fr; gap: 2rem; }
+    .produce-visual { height: 220px; }
+    .produce-circle { width: 180px; height: 180px; font-size: 3.5rem; }
     .produce-big-grid { grid-template-columns: repeat(2, 1fr); }
 
-    .meat-grid { grid-template-columns: 1fr; }
-    .meat-feature { grid-template-columns: 1fr; }
+    .meat-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .meat-feature { grid-template-columns: 1fr; gap: 2rem; }
 
     .world-regions { grid-template-columns: 1fr 1fr; }
 
-    .about-grid { grid-template-columns: 1fr; }
-    .about-visual { height: 300px; }
-    .about-circle-main { width: 200px; height: 200px; font-size: 5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-visual { height: 260px; }
+    .about-circle-main { width: 180px; height: 180px; font-size: 4.5rem; }
+    .about-bubble { font-size: 0.8rem; padding: 0.7rem 1rem; }
 
-    .contact-grid { grid-template-columns: 1fr; }
-    .contact-map { height: 250px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-map { height: 240px; }
 
     .hero-stats { gap: 1.5rem; }
+    .hero-content { padding: 3rem 1.5rem; }
+
+    .offers-header { flex-direction: column; align-items: flex-start; }
+    .offers-header p { text-align: left !important; }
+
+    /* Reduce veggie sidebar on tablet */
+    .sv-item { font-size: 2rem !important; }
   }
 
+
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .review-card {
+    background: #f8fdf8;
+    border: 2px solid #e0f0e0;
+    border-radius: 20px;
+    padding: 1.8rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(45,106,45,0.12);
+    border-color: var(--green-light);
+  }
+  .review-stars { font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .review-card p { color: #444; line-height: 1.7; font-style: italic; font-size: 0.95rem; margin-bottom: 1rem; }
+  .review-author { font-weight: 700; color: var(--green); font-size: 0.9rem; }
+
+  @media (max-width: 700px) {
+    .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+  }
+
+  @keyframes menuSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  /* ===== MOBILE ===== */
   @media (max-width: 600px) {
-    .offers-grid { grid-template-columns: 1fr 1fr; }
-    .produce-big-grid { grid-template-columns: repeat(2, 1fr); }
-    .world-regions { grid-template-columns: 1fr; }
-    .about-features { grid-template-columns: 1fr; }
-    .meat-visual-grid { grid-template-columns: 1fr 1fr; }
-    .hero-stats .hero-stat { min-width: 80px; }
+    nav { padding: 0 1rem; }
+    .nav-logo-text { font-size: 0.95rem; }
+    .nav-logo-icon img { width: 36px !important; height: 36px !important; }
+
+    #hero { min-height: 100svh; }
+    .hero-content { padding: 2rem 1rem; }
+    .hero-badge { font-size: 0.75rem; padding: 5px 14px; }
+    .hero-title { font-size: clamp(2.2rem, 10vw, 3rem); margin-bottom: 1rem; }
+    .hero-sub { font-size: 0.95rem; margin-bottom: 1.8rem; }
+    .hero-buttons { flex-direction: column; align-items: center; gap: 0.75rem; }
+    .btn-primary, .btn-outline { width: 100%; max-width: 300px; justify-content: center; padding: 14px 24px; }
+    .hero-stats { gap: 1rem; margin-top: 2.5rem; }
+    .hero-stat strong { font-size: 1.6rem; }
+    .hero-stat span { font-size: 0.75rem; }
+    .float-item { font-size: 1.8rem !important; opacity: 0.5 !important; }
+    .scroll-indicator { display: none; }
+
+    #offers { padding: 3rem 0; }
+    .offers-header { margin-bottom: 1.5rem; }
+    .section-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+    .offers-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .offer-emoji-bg { height: 130px; font-size: 3.5rem; }
+    .price-tag { font-size: 1.1rem; padding: 6px 10px; }
+    .offer-info { padding: 0.7rem 0.9rem 0.9rem; }
+    .offer-info h3 { font-size: 0.9rem; }
+    .offer-info p { font-size: 0.75rem; }
+    .offer-badge { font-size: 0.65rem; padding: 4px 8px; }
+
+    #produce { padding: 3rem 0; }
+    .produce-header { margin-bottom: 2rem; }
+    .produce-showcase { gap: 1.5rem; }
+    .produce-text h3 { font-size: 1.5rem; }
+    .produce-text p { font-size: 0.9rem; }
+    .produce-icons { gap: 0.6rem; }
+    .produce-icon-item { min-width: 72px; padding: 0.7rem 0.5rem; }
+    .produce-icon-item .big-emoji { font-size: 2rem; }
+    .produce-icon-item span:last-child { font-size: 0.7rem; }
+    .produce-visual { height: 180px; }
+    .produce-circle { width: 150px; height: 150px; font-size: 3rem; }
+    .orbit-item { font-size: 1.8rem; }
+    @keyframes orbit {
+      0%   { transform: rotate(0deg)   translateX(90px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+    }
+    .produce-big-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .produce-big-card { padding: 1rem 0.75rem; border-radius: 14px; }
+    .produce-big-card .big-emoji { font-size: 2.5rem; }
+    .produce-big-card h4 { font-size: 0.85rem; }
+    .produce-big-card p { font-size: 0.7rem; }
+
+    #meat { padding: 3rem 0; }
+    .meat-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .meat-card { padding: 1.5rem 1rem; }
+    .meat-card .big-emoji { font-size: 3rem; }
+    .meat-card h3 { font-size: 1rem; }
+    .meat-card p { font-size: 0.85rem; }
+    .meat-feature { gap: 1.5rem; }
+    .meat-feature-text h3 { font-size: 1.5rem; }
+    .meat-feature-text p { font-size: 0.9rem; }
+    .meat-tags { gap: 0.4rem; }
+    .meat-tag { font-size: 0.75rem; padding: 5px 10px; }
+    .meat-visual-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .meat-vis-item { padding: 1rem; font-size: 2.2rem; }
+    .meat-vis-item span { font-size: 0.75rem; }
+
+    #world { padding: 3rem 0; }
+    .world-intro { font-size: 0.9rem; margin-bottom: 2rem; }
+    .world-regions { grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 2rem; }
+    .region-card { min-height: 160px; border-radius: 18px; }
+    .region-bg { font-size: 3.5rem; }
+    .region-info h3 { font-size: 1.1rem; }
+    .region-info p { font-size: 0.8rem; }
+    .world-products { gap: 0.5rem; }
+    .world-product-chip { font-size: 0.8rem; padding: 7px 14px; }
+
+    #about { padding: 3rem 0; }
+    .about-grid { gap: 1.5rem; }
+    .about-visual { height: 220px; }
+    .about-circle-main { width: 150px; height: 150px; font-size: 4rem; }
+    .about-bubble { font-size: 0.72rem; padding: 0.55rem 0.85rem; }
+    .ab-1 { top: 10px; left: -5px; }
+    .ab-2 { top: 10px; right: -5px; }
+    .ab-3 { bottom: 20px; left: -5px; }
+    .ab-4 { bottom: 20px; right: -5px; }
+    .about-text h2 { font-size: 1.7rem; }
+    .about-text p { font-size: 0.9rem; }
+    .about-features { grid-template-columns: 1fr; gap: 0.75rem; }
+    .about-feature { padding: 0.9rem; }
+    .about-feature .fe-icon { font-size: 1.5rem; }
+    .about-feature h4 { font-size: 0.85rem; }
+    .about-feature p { font-size: 0.75rem; }
+
+    #contact { padding: 3rem 0; }
+    .contact-info h2 { font-size: 1.8rem; }
+    .contact-info > p { font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .contact-item { padding: 0.9rem 1.1rem; gap: 0.8rem; }
+    .ci-icon { font-size: 1.4rem; }
+    .ci-text strong { font-size: 0.9rem; }
+    .ci-text span { font-size: 0.82rem; }
+    .contact-buttons { flex-direction: column; gap: 0.75rem; }
+    .btn-white, .btn-ghost { width: 100%; justify-content: center; padding: 13px 20px; }
+    .contact-map { height: 200px; border-radius: 18px; }
+    .map-placeholder strong { font-size: 1rem; }
+    .map-placeholder p { font-size: 0.82rem; }
+
+    footer { padding: 2rem 1rem; }
+    .footer-logo { font-size: 1.2rem; }
+    .footer-links { gap: 1rem; }
+    .footer-links a { font-size: 0.82rem; }
+    .copyright { font-size: 0.72rem; }
+
+    /* Hide veggie scroll items on mobile - too distracting on small screen */
+    .sv-item { font-size: 1.6rem !important; opacity: 0 !important; }
+    .scroll-veggie-layer { display: none; }
+
+    .real-offer-container { border-radius: 14px; }
+    .real-offer-img { border-radius: 14px; }
+
+    .stripe-divider { height: 5px; }
   }
 
 
@@ -1326,6 +1516,20 @@
         <div class="meat-vis-item mvi-4">🥓<span>Fläsk</span></div>
       </div>
     </div>
+    <div style="margin-top:3rem;padding:2rem;background:rgba(255,255,255,0.06);border-radius:20px;border:1px solid rgba(255,255,255,0.1);" class="reveal">
+      <h3 style="color:var(--lemon);font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:1rem;">❄️ Frysta produkter</h3>
+      <p style="color:rgba(255,255,255,0.75);margin-bottom:1.5rem;line-height:1.7;">Vi har ett stort sortiment av frysta produkter – perfekta för snabb och enkel matlagning. Kycklingklubbor, lammdelar, falafel, molokhia och mycket mer.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;">
+        <span class="meat-tag">❄️ Kycklingklubbor</span>
+        <span class="meat-tag">❄️ Lammstek</span>
+        <span class="meat-tag">❄️ Falafel</span>
+        <span class="meat-tag">❄️ Molokhia</span>
+        <span class="meat-tag">❄️ Shrimps</span>
+        <span class="meat-tag">❄️ Köttbullar</span>
+        <span class="meat-tag">❄️ Pitabröd</span>
+        <span class="meat-tag">❄️ Baklava deg</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1445,6 +1649,36 @@
 
 <div class="stripe-divider"></div>
 
+<!-- REVIEWS -->
+<section id="reviews" style="background:#fff;padding:4rem 0;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-tag green reveal" style="display:inline-flex;margin-bottom:0.75rem;">⭐ Vad kunderna säger</div>
+      <h2 class="section-title dark reveal">4.1 av 5 stjärnor</h2>
+      <p class="reveal" style="color:#777;font-size:0.95rem;">Baserat på 52 recensioner på Google</p>
+    </div>
+    <div class="reviews-grid reveal">
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p>"Fantastisk butik med ett enormt utbud av internationella produkter. Hittar alltid det jag letar efter!"</p>
+        <div class="review-author">— Ahmad K.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p>"Bästa affären i Katrineholm för orientaliska varor. Personalen är alltid hjälpsam och trevlig."</p>
+        <div class="review-author">— Maria S.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐</div>
+        <p>"Frukterna och grönsakerna är alltid färska. Bra priser och veckans erbjudanden slår konkurrenterna."</p>
+        <div class="review-author">— Mikael L.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe-divider"></div>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="container section-pad">
@@ -1485,15 +1719,11 @@
       </div>
 
       <div class="contact-map reveal">
-        <div class="map-ripple"></div>
-        <div class="map-pin-animation"></div>
-        <div class="map-placeholder">
-          <div class="map-icon">🗺️</div>
-          <strong>Vingåkersvägen 45</strong>
-          <strong>641 51 Katrineholm</strong>
-          <p>Klicka "Vägbeskrivning" för<br>Google Maps-navigering</p>
-          <a href="https://maps.google.com/?q=Vingåkersvägen+45+Katrineholm" target="_blank" class="btn-white" style="margin-top:0.5rem;">Öppna i Google Maps 🗺️</a>
-        </div>
+        <iframe
+          src="https://maps.google.com/maps?q=Ving%C3%A5kersv%C3%A4gen+45+Katrineholm+Sweden&output=embed&hl=sv&z=16"
+          width="100%" height="100%" style="border:0;border-radius:22px;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Matbutiken i Katrineholm karta">
+        </iframe>
       </div>
     </div>
   </div>
@@ -1531,19 +1761,38 @@
   });
 
   // Mobile menu
+  let menuOpen = false;
   function toggleMenu(btn) {
     const nav = document.querySelector('.nav-links');
-    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-    nav.style.flexDirection = 'column';
-    nav.style.position = 'absolute';
-    nav.style.top = '70px';
-    nav.style.left = '0';
-    nav.style.right = '0';
-    nav.style.background = 'white';
-    nav.style.padding = '1rem 2rem';
-    nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-    nav.style.zIndex = '999';
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      Object.assign(nav.style, {
+        display: 'flex', flexDirection: 'column', position: 'fixed',
+        top: '70px', left: '0', right: '0', bottom: '0',
+        background: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(20px)',
+        padding: '2rem', boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+        zIndex: '999', gap: '0', overflowY: 'auto',
+        animation: 'menuSlide 0.3s ease'
+      });
+      nav.querySelectorAll('a').forEach(a => {
+        Object.assign(a.style, { padding: '1rem 0', fontSize: '1.3rem', borderBottom: '1px solid #eee', display: 'block' });
+      });
+      btn.children[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+      btn.children[1].style.opacity = '0';
+      btn.children[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    } else {
+      nav.style.display = 'none';
+      btn.children[0].style.transform = '';
+      btn.children[1].style.opacity = '';
+      btn.children[2].style.transform = '';
+    }
   }
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (menuOpen) { menuOpen = false; document.querySelector('.nav-links').style.display = 'none'; const b = document.querySelector('.hamburger'); b.children[0].style.transform=''; b.children[1].style.opacity=''; b.children[2].style.transform=''; }
+    });
+  });
 
   // Scroll reveal observer
   const revealObserver = new IntersectionObserver((entries) => {
