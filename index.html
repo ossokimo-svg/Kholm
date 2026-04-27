@@ -1058,6 +1058,8 @@
 
   @media (max-width: 700px) {
     .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .review-card { padding: 1.3rem; }
+    .review-card p { font-size: 0.88rem; }
   }
 
   @keyframes menuSlide {
@@ -1100,7 +1102,9 @@
     .offers-header p { text-align: left !important; }
 
     /* Reduce veggie sidebar on tablet */
-    .sv-item { font-size: 2rem !important; }
+    .sv-item { font-size: 2.2rem !important; }
+    .sv-left  { left: -60px !important; }
+    .sv-right { right: -60px !important; }
   }
 
 
@@ -1128,6 +1132,8 @@
 
   @media (max-width: 700px) {
     .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .review-card { padding: 1.3rem; }
+    .review-card p { font-size: 0.88rem; }
   }
 
   @keyframes menuSlide {
@@ -1177,8 +1183,8 @@
     .produce-circle { width: 150px; height: 150px; font-size: 3rem; }
     .orbit-item { font-size: 1.8rem; }
     @keyframes orbit {
-      0%   { transform: rotate(0deg)   translateX(90px) rotate(0deg); }
-      100% { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+      0%   { transform: rotate(0deg)   translateX(80px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
     }
     .produce-big-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .produce-big-card { padding: 1rem 0.75rem; border-radius: 14px; }
@@ -1237,7 +1243,7 @@
     .ci-text span { font-size: 0.82rem; }
     .contact-buttons { flex-direction: column; gap: 0.75rem; }
     .btn-white, .btn-ghost { width: 100%; justify-content: center; padding: 13px 20px; }
-    .contact-map { height: 200px; border-radius: 18px; }
+    .contact-map { height: 280px; border-radius: 18px; }
     .map-placeholder strong { font-size: 1rem; }
     .map-placeholder p { font-size: 0.82rem; }
 
@@ -1247,9 +1253,10 @@
     .footer-links a { font-size: 0.82rem; }
     .copyright { font-size: 0.72rem; }
 
-    /* Hide veggie scroll items on mobile - too distracting on small screen */
-    .sv-item { font-size: 1.6rem !important; opacity: 0 !important; }
-    .scroll-veggie-layer { display: none; }
+    /* Mobile veggie - smaller, only peek from sides */
+    .sv-item { font-size: 1.8rem !important; }
+    .sv-left  { left: -55px !important; }
+    .sv-right { right: -55px !important; }
 
     .real-offer-container { border-radius: 14px; }
     .real-offer-img { border-radius: 14px; }
@@ -1296,10 +1303,10 @@
     user-select: none;
   }
 
-  /* Left side items */
-  .sv-left  { left: -80px; }
+  /* Left side items - hide off screen, peek via translateX */
+  .sv-left  { left: -70px; }
   /* Right side items */
-  .sv-right { right: -80px; }
+  .sv-right { right: -70px; }
 
   /* ===== SCROLL ANIMATIONS ===== */
   .slide-in-left { opacity: 0; transform: translateX(-60px); }
@@ -1331,6 +1338,18 @@
     height: 8px;
     background: linear-gradient(90deg, var(--green), var(--lettuce), var(--yellow), var(--orange), var(--red), var(--purple), var(--green));
   }
+
+  @media (max-width: 390px) {
+    .hero-title { font-size: 2rem; }
+    .hero-badge { font-size: 0.7rem; }
+    .offers-grid { grid-template-columns: 1fr; }
+    .produce-big-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .sv-left  { left: -60px !important; }
+    .sv-right { right: -60px !important; }
+    .sv-item  { font-size: 1.5rem !important; }
+  }
+
 </style>
 </head>
 <body>
@@ -2027,8 +2046,10 @@
 <script>
   /* ===== SCROLL VEGGIE ANIMATION ===== */
   (function() {
+    const isMobile = () => window.innerWidth <= 600;
+    const isTablet = () => window.innerWidth <= 900;
+
     const items = [
-      // LEFT SIDE — emoji, startY (vh), peekX (px from edge), speed, size
       { emoji: '🍅', side: 'left',  startY: 10,  peekX: 55,  speed: 0.18, size: '3.2rem', rot: -20 },
       { emoji: '🥦', side: 'right', startY: 22,  peekX: 60,  speed: 0.25, size: '3.5rem', rot:  15 },
       { emoji: '🍋', side: 'left',  startY: 35,  peekX: 50,  speed: 0.20, size: '3rem',   rot:  25 },
@@ -2045,7 +2066,6 @@
       { emoji: '🫐', side: 'right', startY: 90,  peekX: 56,  speed: 0.23, size: '2.8rem', rot:  12 },
     ];
 
-    // Create layer
     const layer = document.createElement('div');
     layer.className = 'scroll-veggie-layer';
     document.body.appendChild(layer);
@@ -2063,50 +2083,44 @@
 
     let lastScrollY = window.scrollY;
     let ticking = false;
-    const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
 
-    function getScrollProgress() {
-      return window.scrollY / (maxScroll() || 1);
+    function getPeek(item) {
+      // On mobile peek less so items don't cover content
+      if (isMobile()) return Math.min(item.peekX, 38);
+      if (isTablet()) return Math.min(item.peekX, 48);
+      return item.peekX;
     }
 
     function update() {
       const scrollY = window.scrollY;
-      const progress = getScrollProgress();
-      const delta = scrollY - lastScrollY; // positive = scrolling down
+      const mobile = isMobile();
+      const tablet = isTablet();
 
       elems.forEach(item => {
         const el = item.el;
-
-        // Each item has its own "scroll window" based on startY
-        // Calculate how far this item should have traveled
         const offset = scrollY * item.speed;
-        const wobble = Math.sin(scrollY * 0.003 + item.startY) * 8;
-
-        // Peek amount: come into view partially
-        const peekAmount = item.peekX + wobble;
+        const wobble = Math.sin(scrollY * 0.003 + item.startY) * (mobile ? 4 : 8);
+        const peekAmount = getPeek(item) + wobble;
         const xVal = item.side === 'left' ? peekAmount : -peekAmount;
-
-        // Rotation changes with scroll
-        const rotOffset = Math.sin(scrollY * 0.005 + item.startY * 0.1) * 15;
+        const rotOffset = Math.sin(scrollY * 0.005 + item.startY * 0.1) * (mobile ? 8 : 15);
         const finalRot = item.rot + rotOffset;
-
-        // Y position: item moves up as you scroll down (parallax)
-        // It starts at startY vh and drifts
         const yDrift = -offset % window.innerHeight;
 
-        // Opacity: visible when in a certain scroll band
-        // Each item cycles in and out every ~600px of scroll
-        const cycle = 700;
+        // On mobile use shorter cycle so items appear more frequently
+        const cycle = mobile ? 500 : 700;
+        const fadeDur = mobile ? 80 : 120;
         const phase = (scrollY * item.speed + item.startY * 60) % cycle;
         let opacity;
-        if (phase < 120) {
-          opacity = phase / 120;          // fade in
-        } else if (phase < cycle - 120) {
-          opacity = 1;                    // fully visible
+        if (phase < fadeDur) {
+          opacity = phase / fadeDur;
+        } else if (phase < cycle - fadeDur) {
+          opacity = 1;
         } else {
-          opacity = (cycle - phase) / 120; // fade out
+          opacity = (cycle - phase) / fadeDur;
         }
-        opacity = Math.max(0, Math.min(0.85, opacity));
+        // Lower max opacity on mobile so it's subtle
+        const maxOpacity = mobile ? 0.65 : 0.85;
+        opacity = Math.max(0, Math.min(maxOpacity, opacity));
 
         el.style.opacity = opacity;
         el.style.transform = 'translateX(' + xVal + 'px) translateY(' + yDrift + 'px) rotate(' + finalRot + 'deg)';
@@ -2123,7 +2137,8 @@
       }
     }, { passive: true });
 
-    // Initial call
+    // Recalc on resize
+    window.addEventListener('resize', update);
     update();
   })();
 </script>
